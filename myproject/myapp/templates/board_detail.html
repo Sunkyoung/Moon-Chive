@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>실습 후기 내용입니다</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <td col ="col">제목</td>
+                <td>{{ board.title }}</td>
+            </tr>
+            <tr>
+                <td col ="col">날짜</td>
+                <td>{{ board.pub_date }}</td>
+            </tr>
+            <tr>
+                <td col ="col">내용</td>
+                <td>{{ board.body }}</td>
+            </tr>
+        </thead>
+    </table>
+    <hr>
+    <div class="buttons">
+    <div class="l_buttons">
+        <a href="{% url 'board' %}">
+            <button class="btn btn-dark l_buttons" >돌아가기</button>
+        </a>
+    </div>
+    <div class="r_buttons">
+        <a href="{% url 'update' board.id %}">
+            <button class="btn btn-dark">수정하기</button>
+        </a>
+        <a href="{% url 'delete' board.id %}">
+            <button class="btn btn-dark">삭제하기</button>
+        </a>
+    </div>
+    </div>
+    
+    
+    <hr>
+    <div>
+        {% for comment in board.comments.all %}
+        <div>
+            <p>{{ comment.c_author }}</p>
+            <small>{{ comment.c_date }}</small>
+            <a href="{% url 'comment_delete' board.id comment.id %}">삭제</a>
+            <p> {{ comment.c_content }}</p>
+        </div>
+        {% empty %}
+        <div>
+            <p>작성된 댓글이 없습니다!</p>
+        </div>
+        {% endfor%}
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-dark" type="submit">댓글 작성</button>
+    </form>
+
+    
+    
+</div>
+
+{% endblock content %}

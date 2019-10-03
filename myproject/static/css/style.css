@@ -1,0 +1,17 @@
+p {
+    font-size: 100em;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+}
+.r_buttons {
+    box-sizing: content-box;
+    margin-left: auto;
+    position: absolute;
+}
+.l_buttons {
+    flex: none;
+    position: absolute;
+}
