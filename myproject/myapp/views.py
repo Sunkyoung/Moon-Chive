@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from .models import Notice, Board, Comment
 from .forms import BoardForm, CommentForm
 from django.utils import timezone
+
 # Create your views here.
 # 홈 화면 보여주는 함수
 def home(request):
@@ -40,7 +41,7 @@ def comment_delete(request, board_id, comment_id):
 def board_create(request):
     # 게시판 글쓰기에서 입력받은 내용을 데이터베이스에 추가
     if request.method == 'POST':
-        form = BoardForm(request.POST)
+        form = BoardForm(request.POST, request.FILES)
         if form.is_valid():
             board = form.save(commit=False)
             board.save()
@@ -60,7 +61,7 @@ def board_update(request, board_id):
     board = get_object_or_404(Board, pk=board_id)
     # 게시판 수정된 내용을 데이터베이스에 추가
     if request.method == 'POST':
-        form = BoardForm(request.POST, instance=board)
+        form = BoardForm(request.POST, request.FILES, instance=board)
         if form.is_valid():
             board = form.save(commit=False)
             board.save()

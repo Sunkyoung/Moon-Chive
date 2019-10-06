@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% load static %}
+{% load staticfiles %}
 
 {% block content %}
-<div class="container">
-    <h1>실습 후기 내용입니다</h1>
+<div class="container" style="font-size: large;">
+    <h1>실습 후기</h1>
     <table class="table">
         <thead>
             <tr>
@@ -11,48 +11,83 @@
                 <td>{{ board.title }}</td>
             </tr>
             <tr>
-                <td col ="col">날짜</td>
+                <td col ="col">글 작성일</td>
                 <td>{{ board.pub_date }}</td>
+            </tr>
+            <tr>
+                <td col ="col">실습 기관명</td>
+                <td>{{ board.pr_inst }}</td>
+                <td col ="col">실습 기간</td>
+                <td>{{ board.pr_startdate }} ~ {{ board.pr_enddate }}</td>
+            </tr>
+            <tr>
+                <td col ="col">위치</td>
+                <td>{{ board.pr_location }}</td>
+                <td col ="col">교통</td>
+                <td>버스 : {{ board.pr_tranbus }} 지하철 : {{ board.pr_transub }}</td>
+            </tr>
+            <tr>
+                <td col ="col">근무 요일</td>
+                <td>{{ board.pr_day }}</td>
+                <td col ="col">근무 시간</td>
+                <td>{{ board.pr_starttime }} ~ {{ board.pr_endtime }}</td>
+            </tr>
+            <tr>
+                <td col="col"> 총 실습인원 </td>
+                <td>{{ board.pr_num }}</td>
             </tr>
             <tr>
                 <td col ="col">내용</td>
                 <td>{{ board.body }}</td>
             </tr>
+            {% if board.pr_file %}
+            <tr>
+                <td col ="col">첨부파일</td>
+                <td><a href="{{ board.pr_file.url }}">{{ board.pr_file.name }}</a></td>
+            </tr>
+            {% endif %}
         </thead>
     </table>
     <hr>
     <div class="buttons">
-    <div class="l_buttons">
-        <a href="{% url 'board' %}">
-            <button class="btn btn-dark l_buttons" >돌아가기</button>
-        </a>
-    </div>
-    <div class="r_buttons">
-        <a href="{% url 'update' board.id %}">
-            <button class="btn btn-dark">수정하기</button>
-        </a>
-        <a href="{% url 'delete' board.id %}">
-            <button class="btn btn-dark">삭제하기</button>
-        </a>
-    </div>
+        <div class="l_buttons">
+            <a href="{% url 'board' %}">
+                <button class="btn btn-dark">돌아가기</button>
+            </a>
+        </div>
+        <div class="r_buttons">
+            <a href="{% url 'update' board.id %}">
+                <button class="btn btn-dark">수정하기</button>
+            </a>
+            <a href="{% url 'delete' board.id %}">
+                <button class="btn btn-dark">삭제하기</button>
+            </a>
+        </div>
     </div>
     
     
     <hr>
-    <div>
-        {% for comment in board.comments.all %}
-        <div>
-            <p>{{ comment.c_author }}</p>
-            <small>{{ comment.c_date }}</small>
-            <a href="{% url 'comment_delete' board.id comment.id %}">삭제</a>
-            <p> {{ comment.c_content }}</p>
-        </div>
-        {% empty %}
-        <div>
-            <p>작성된 댓글이 없습니다!</p>
-        </div>
-        {% endfor%}
-    </div>
+   
+    {% for comment in board.comments.all %}
+    <table class = "table">
+        <tbody>
+            <tr>
+                <td>{{ comment.c_author }}</td>
+                <td>{{ comment.c_date }}</td>
+                <td><a href="{% url 'comment_delete' board.id comment.id %}">삭제</a></td>
+            </tr>
+            <tr>
+                <td> {{ comment.c_content }} </td>
+            </tr>
+        </tbody>
+    </table>
+       
+    {% empty %}
+    
+    <p>작성된 댓글이 없습니다!</p>
+       
+    {% endfor%}
+
 
     <form method="POST">
         {% csrf_token %}
