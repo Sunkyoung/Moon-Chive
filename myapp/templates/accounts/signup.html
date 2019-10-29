@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div id="account-page">
+
+        {% if error %}
+        {{ error }}
+        <br>
+        <br>
+        {% endif %}
+
+        <h1>회원가입</h1>
+
+        <form method="POST" action="" style="text-align: -webkit-center;">
+        {% csrf_token %}
+                <table style="text-align: center;">
+                    <tr> <!-- 첫번째줄 -->
+                        <td>Username</td>
+                        <td><input name="username" type="text" value=""></td>
+                    </tr>
+                    <tr> <!-- 두번째줄 -->
+                        <td>Password</td>
+                        <td><input name="password1" type="password" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Confirm Password</td>
+                        <td><input name="password2" type="password" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>이름</td>
+                        <td><input name="first_name" type="first_name" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input name="email" type="email" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Major</td>
+                        <td><input name="major" type="major" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Major_Type</td>
+                        <td><input name="major_type" type="major_type" value=""></td>
+                    </tr>
+                    <tr>
+                        <td><button class="" type="submit">회원가입</button></td>
+                    </tr>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
+
+
+

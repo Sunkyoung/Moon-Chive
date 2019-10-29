@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{% block content %}
+
+<div class="container "style="font-family: 'NanumSquare', sans-serif; font-size:larger;">
+
+<br><br>    
+    <h1 style="font-weight:large; text-align:center;">새글쓰기</h1>
+    <br><br>
+    <form method="POST" action="" enctype="multipart/form-data" novalidate >
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ form.media }}
+    <button class="btn btn-dark" type="submit">업로드</button>
+    </form>
+</div>
+<br /> <br />
+{% endblock content %}

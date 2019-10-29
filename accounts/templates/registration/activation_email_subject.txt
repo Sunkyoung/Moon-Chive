@@ -1,0 +1,1 @@
+{% load i18n %}계정 활성화됨 {{ site.name }}
