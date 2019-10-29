@@ -1,0 +1,49 @@
+
+{% extends "base.html" %}
+{% load staticfiles %}
+
+<body>
+    {% block content %}
+    <!-- Header -->
+		<div id="header">
+        <img src="{% static 'images/logo.png' %}" class="logo" />
+        <h1>문-카이브 Moon-arChive</h1>
+        <p id="home-p"> 이화여자대학교 <a href="">문헌정보학과</a> 졸업실습 아카이빙 사이트입니다.
+        <br />
+        문헌정보학과 <a href="{% url 'about' %}">다섯명의 학부생</a>이 제작하였습니다.</p>
+    </div>
+          
+      <!-- Main -->
+      <div id="main">
+        <header class="major container medium">
+          <h2 class="intro">문카이브는 <span style="font-weight:bold;">LEAP 소그룹 활동</span> 지원을 바탕으로 제작되었습니다.
+          <br />
+          사전조사에 응해주신 모든 문헌정보학과 재학생, 졸업생분들과
+          <br />
+          기획 초기부터 많은 도움 주신 김지현 교수님,
+          <br />
+          미래혁신센터에 감사의 말씀을 전합니다.</h2>
+        </header>
+
+
+        <header class="major container medium">
+          <h2 class="intro">문카이브는 <span style="font-weight:bold;">외부인의 이용</span>이 불가합니다.
+          <br />
+          오직 <span style="font-weight:bold;">문헌정보학과 전공생, 졸업생</span>만이 이용 가능합니다.
+          <br />
+          회원 정보는 문헌정보학과 학생회에서 관리합니다.
+          <br />
+          가입 승인과 관련한 문의는 학생회로 연락 바랍니다.</h2>
+        </header>
+      </div>
+    
+
+    <div class="container">
+
+    {% endblock %}
+
+    </div>
+
+
+
+</body>

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+
+    <div class="container">
+        <h1 style="margin-top:1em;">{{ notice.title }}</h1>
+        <p>{{ notice.pub_date_pretty }}</p>
+        <p>{{ notice.body }}</p>
+        <a href="{% url 'notice' %}" style="text-decoration:none;">돌아가기</a>
+    </div>
+
+    {% endblock %}

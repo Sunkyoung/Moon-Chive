@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+    {% block content %}
+    <div class="container">
+      <h1 style="margin-top:1em; background-color:rgba(224, 224, 224, 0.75); padding:0.5em;">학생회 공지사항</h1>
+
+    {% for notice in notices.all %}
+    <br>
+    <div class="panel panel-default notice-box">
+        <a href="{% url 'detail' notice.id %}">
+            <h1 class="panel-body notice-content">{{ notice.title }}</h1>
+        </a>
+        <p>{{ notice.pub_date_pretty }}</p>
+        <p>{{ notice.summary }}</p>
+    </div>
+
+    {% endfor %}
+    </div>
+    
+    <!-- bootstrap4 js관련 CDN 부분 -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+  crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+  crossorigin="anonymous"></script>
+
+{% endblock %}

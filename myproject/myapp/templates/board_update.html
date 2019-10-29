@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container">
+    <h1>글 수정하기</h1>
+    <br><br>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <input class="btn btn-dark" type="submit" value="업로드">
+    </form>
+</div>
+
+{% endblock content %}
