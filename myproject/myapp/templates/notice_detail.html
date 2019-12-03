@@ -3,6 +3,22 @@
     {% block content %}
 
     <div class="container">
+        <h1 style="margin-top:1em; padding:0.5em; border-bottom:outset;">학생회 공지사항</h1>
+  
+      {% for notice in posts %}
+      <br>
+      <div class="panel panel-default notice-box" style="display: inline-block;">
+          <a href="{% url 'detail' notice.id %}">
+              <h1 class="panel-body notice-content">{{ notice.title }}</h1>
+          </a>
+          <p>{{ notice.pub_date_pretty }}</p>
+          <p>{{ notice.summary }}</p>
+      </div>
+      {% endfor %}
+
+
+
+    <div class="container">
         <h1 style="margin-top:1em;">{{ notice.title }}</h1>
         <p>{{ notice.pub_date_pretty }}</p>
         <p>{{ notice.body }}</p>

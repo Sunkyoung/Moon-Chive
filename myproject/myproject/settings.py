@@ -30,8 +30,9 @@ ALLOWED_HOSTS = []
 LOGIN_REDIRECT_URL =''
 # Application definition
 
+SESSION_COOKIE_SECURE = False
+
 INSTALLED_APPS = [
-   
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,10 +40,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp.apps.MyappConfig',
-    'accounts.apps.AccountsConfig'
+    'accounts',
+    'django_registration',
+    'bootstrap_datepicker_plus',
+    'bootstrap4',
+    'ckeditor',
+    
+    
 ]
 
 MIDDLEWARE = [
+    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -57,7 +65,9 @@ ROOT_URLCONF = 'myproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': 
+             [os.path.join(BASE_DIR, 'templates')],
+            
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -102,11 +112,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'accounts.Account'
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'ko'
+LANGUAGE_CODE = 'ko-KR'
 
 TIME_ZONE = 'Asia/Seoul'
 
@@ -127,3 +141,8 @@ STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'), ]
 # media
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
+

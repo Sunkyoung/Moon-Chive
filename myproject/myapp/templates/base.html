@@ -21,35 +21,37 @@
     <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-    <!-- Fengyuan Chen's Datepicker -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- navbar -->
     <div id='cssmenu'>
-       <ul>
-           <li class='active'><a href="{% url 'home' %}">Home</a></li>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'images/logo.png' %}" style="height: 2em; margin-top: 0.8em;">
+            <p style="text-decoration:none; color:black; font-family: 'NanumSquare', sans-serif; display:inline-block; vertical-align:bottom;">문카이브</p>
+        </a>
+        <ul>
+           <!--<li class='active'><a href="{% url 'home' %}">Home</a></li>-->
            <li><a href="{% url 'about' %}">About</a></li>
            <li><a href="{% url 'notice' %}">Notice</a></li>
-           
-        
            {% if user.is_authenticated %}
                 <li><a href="{% url 'board' %}">Board</a></li>
                 
                 <li class="topMenuLi"><a href="#">Accounts</a>
                 <ul class="submenu">
                 환영합니다.{{ user.username }}님!
-                <li><a href="{% url 'change_pw' %}" class="submenuLink longLink">비밀번호 변경</a>
-                <li><a href="javascript: {document.getElementById('logout').submit()}" class="submenuLink longLink"> 로그아웃</a>
-                <form id="logout" method="POST" action="{% url 'logout' %}">
+                
+                <li><a href="" class="submenuLink longLink">회원정보수정</a>
+                <li><a href="" class="submenuLink longLink">비밀번호 변경</a>
+                <li><a href=""> 로그아웃</a>
+                <form id="logout" method="POST" action="">
                 {% csrf_token %} <input type="hidden" /> 
                 </form> 
+                <li><a href="/accounts/logout/" class="submenuLink longLink">회원탈퇴</a>
             {% else %}
                 <li class="topMenuLi"><a href="">Accounts</a>
                 <ul class="submenu">
-                <li><a href="{% url 'login' %}" class="submenuLink longLink">Login</a></li>
-                <li><a href="{% url 'signup' %}" class="submenuLink longLink">Signup</a></li>
+                <li><a href="/accounts/login/" class="submenuLink longLink">Login</a></li>
+                <li><a href="/accounts/register" class="submenuLink longLink">Signup</a></li>
            {% endif %}
         </ul>
     </div>
@@ -57,15 +59,6 @@
     {% block content %}
     {% endblock %}
 
-    <script>
-        $(function() {
-          $( ".datepicker" ).datepicker({
-            // changeMonth: true,
-            // changeYear: true,
-            // yearRange: "2000:2019",
-                // You can put more options here.
-              });
-            });
-    </script>
+    
 </body>
 </html>

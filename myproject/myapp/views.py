@@ -1,7 +1,11 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import Notice, Board, Comment
+from .models import Notice, Board, Comment, Account
 from .forms import BoardForm, CommentForm
 from django.utils import timezone
+from django.core.paginator import Paginator
+# from django.contrib.auth.decorators import login_required
+# from myapp.forms import CustomAccountForm
+# from django_registration.backends.activation.views import RegistrationView as BaseRegistrationView
 
 # Create your views here.
 # 홈 화면 보여주는 함수
@@ -15,7 +19,14 @@ def about(request):
 # 게시판 글들 보여주는 함수
 def board(request):
     boards = Board.objects
-    return render(request, 'board.html', {'boards' : boards})
+    board_list = Board.objects.all()
+    paginator = Paginator(board_list, 10)
+    page = request.GET.get('page','1')
+    if page == '':
+        page = '1'
+    page = int(page)
+    posts = paginator.get_page(page)
+    return render(request, 'board.html', {'boards' : boards, 'posts' : posts})
 
 # 게시판 구체적 내용 보여주는 함수
 def board_detail(request, board_id):
@@ -75,9 +86,30 @@ def board_update(request, board_id):
 # 공지 글들 보여주는 함수
 def notice(request):
     notices = Notice.objects
-    return render(request, 'notice.html', {'notices': notices})
+    notice_list = Notice.objects.all()
+    paginator = Paginator(notice_list, 5)
+    page = request.GET.get('page','1')
+    if page == '':
+        page = '1'
+    page = int(page)
+    posts = paginator.get_page(page)
+    return render(request, 'notice.html', {'notices': notices, 'posts' : posts})
+
 
 # 공지 구체적 내용 띄워주는 함수
 def notice_detail(request, notice_id):
     notice_detail = get_object_or_404(Notice, pk=notice_id)
-    return render( request, 'notice_detail.html', {'notice': notice_detail})
+    return render(request, 'notice_detail.html', {'notice': notice_detail})
+
+# registration
+# class RegistrationView(BaseRegistrationView):
+#     form_class = CustomAccountForm
+
+#     def register(self, form):
+#         new_user = BaseRegistrationView.register(self, form)
+#         acc = Account()
+#         acc.username = form.cleaned_data['username']
+#         acc.user = new_user
+#         # acc.status = 'created'
+#         acc.save()
+        

@@ -15,12 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django_registration.backends.activation.views import RegistrationView
+# from myapp.forms import RegistrationForm
+from django.conf.urls import url
 import myapp.views
+from accounts.forms import CustomAccountForm
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 urlpatterns = [
-    path('accounts/', include('accounts.urls')),
+    
+    # path('accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),
     path('', myapp.views.home, name='home'),
     path('about/', myapp.views.about, name='about'),
@@ -30,6 +36,17 @@ urlpatterns = [
     path('board/<int:board_id>/delete/', myapp.views.board_delete, name='delete'),
     path('board/<int:board_id>/update', myapp.views.board_update, name='update'),
     path('board/<int:board_id>/comment/<int:comment_id>/delete', myapp.views.comment_delete, name='comment_delete'),
+    # path('account/create/', RegistrationView.as_view(), name='signup'),
+    #path('account/login/', AccountLoginView.as_view(), name='login'),
     path('notice', myapp.views.notice, name='notice'),
     path('notice/<int:notice_id>/', myapp.views.notice_detail, name='detail'),
+    url(r'^accounts/', include('accounts.urls')),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(r'^accounts/register/$',
+        RegistrationView.as_view(
+            form_class=CustomAccountForm
+        ), name='django_registration_register'),
+    url(r'^accounts/', include('django_registration.backends.activation.urls')),
+    
+    # url(r'^accounts/', include('django_registration.backends.one_step.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

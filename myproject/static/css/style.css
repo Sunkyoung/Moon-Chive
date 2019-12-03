@@ -34,6 +34,16 @@ body {
     margin: 0;
 }
 
+#account-page {
+    background: rgba(224, 224, 224, 0.75);
+    font-family: 'NanumSquare', sans-serif;
+    text-decoration: none;
+    margin-top: 1em;
+    padding-top:0.5em;
+    padding-bottom:0.5em;
+    text-align: center;
+}
+
 .menu {
     display: flex;
     flex-direction: row;
@@ -101,7 +111,13 @@ body {
 }
 #cssmenu ul {
   background: #ffffff;
+  float: right;
 }
+
+#cssmenu a {
+    text-decoration:none;
+}
+
 #cssmenu > ul > li {
   float: left;
 }
@@ -365,14 +381,12 @@ header.major {
 a {
     -moz-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
     -webkit-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-a:hover {
-    color:black;
-    text-decoration:none;
-}    color: #4eb980;
-    text-decoration: none;
 }
 
 a:hover {
+    text-decoration:none;
+    color: #4eb980;
+    text-decoration: none;
     border-bottom-color: transparent;
 }
 
@@ -504,3 +518,9 @@ p{
     /* 글씨색을 빨간색으로 설정 */
     background-color: #dddddd;
     /* 배경을 RGB(DDDDDD)로 설정 */ }
+
+/* paginator */
+/* .pagination>li.active>a {
+  background: purple;
+  color: #fff;
+} */

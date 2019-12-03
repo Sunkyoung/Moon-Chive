@@ -1,14 +1,17 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-
+{% load bootstrap4 %}       
+{% bootstrap_css %}        
+{% bootstrap_javascript jquery='full' %}
 {% block content %}
 
 <div class="container">
     <h1>글 수정하기</h1>
     <br><br>
-    <form method="POST" action="">
+    <form method="POST" action="" enctype="multipart/form-data" novalidate >
         {% csrf_token %}
         {{ form.as_p }}
+        {{ form.media }}
     <input class="btn btn-dark" type="submit" value="업로드">
     </form>
 </div>

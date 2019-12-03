@@ -2,38 +2,82 @@
 {% load staticfiles %}
 
 {% block content %}
-
-<div class="container" style="font-size: large;">
+<div class="container">
+    <td class="container" style="font-size: large;">
     <br /><h1 style="margin-top:1em; background-color:rgba(224, 224, 224, 0.75); padding:0.5em;"">실습 후기</h1>
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">제목</th>
-                <th scope="col">글쓴날</th>
+                <th scope="col" style="text-align: center;">제목</th>
+                <th scope="col" style="text-align: center;">글쓴날</th>
             </tr>
         </thead>
         <tbody>
-            {% for board in boards.all %}
+            {% for board in posts %}
             <tr>
                 <td>
-                    <a href="{% url 'board_detail' board.id %}" id="link_click">
+                    <a href="{% url 'board_detail' board.id %}" id="link_click" style="width:80%;">
                         {{ board.title }}
                     </a>
                 </td>
-                <td>
+                <td style="text-align: center;">
                     {{ board.pub_date }}
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-
+    </td>
     <div class="r_buttons">
         <a href="{% url 'create' %}">
             <button class="btn btn-dark">글쓰기</button>
         </a>
     </div>
    
+ 
+    <!-- Paginator  -->
+    <nav aria-label="Page navigation example">
+    <ul class="pagination">
+        {% if posts.has_previous %}
+            <li class="page-item">
+            <a class="page-link" href="?page={{posts.previous_page_number}}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+            </li>
+        {% else %}
+            <li class="disabled">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+            </li>
+        {% endif %}
+
+        {% for page in posts.paginator.page_range %} 
+        <li {% ifequal page post.number %} class ="active"{% endifequal %}>
+            <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+        </li>
+        {% endfor %}
+
+        {% if posts.has_next %}
+        <li class="page-item">
+        <a class="page-link" href="?page={{posts.next_page_number}}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+        </a>
+        </li>
+        {% else %}
+            <li class="disabled">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+            </li>
+        {% endif %}
+    </ul>
+    </nav>
 </div>
+
 
 {% endblock content %}

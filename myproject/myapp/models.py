@@ -1,6 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
-
+from accounts.models import Account
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 class Notice(models.Model):
@@ -12,9 +12,10 @@ class Notice(models.Model):
         return self.title
 
 class Board(models.Model):
+
     title = models.CharField(max_length=200)
     pub_date=models.DateTimeField(auto_now_add=True)
-    body=models.TextField()
+    body=RichTextField()
     # hit = 
     pr_inst = models.CharField(default='도서관',max_length=20)
     pr_startdate = models.DateField(default='2019-07-01')
@@ -39,9 +40,28 @@ class Comment(models.Model):
     c_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.content
+        return self.c_content
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    email = models.EmailField(max_length=254)
-    major = models.CharField(max_length=200)
+# class Profile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     TYPE_MAJOR=(
+#         ('주전공','문헌정보학과'),
+#         ('복수전공', '타전공')
+#         )
+
+#      TYPE_PERMISSIONS = (
+#         ('ADMIN', '관리자'),
+#         ('TINK', '팅커벨'),
+#         ('PETER', '일반'),
+#     )
+#     email = models.EmailField(max_length=254)
+#     student_id = models.CharField(max_length=7)
+#     major = models.CharField(max_length=200)
+#     major_type = models.CharField(max_length=4,choices=TYPE_MAJOR,default='주전공')
+#     permission = models.CharField('권한', max_length=2, choices=TYPE_PERMISSIONS, default='PETER')
+#     certification_date = models.DateField('인증일', default=None, null=True, blank=True)
+#     is_certificated = models.BooleanField('인증여부', default=False)
+    
+class Category(models.Model):
+    name=models.CharField('카테고리 이름', max_length=20)
+
