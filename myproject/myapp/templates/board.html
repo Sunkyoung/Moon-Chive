@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container">
     <td class="container" style="font-size: large;">
-    <br /><h1 style="margin-top:1em; background-color:rgba(224, 224, 224, 0.75); padding:0.5em;"">실습 후기</h1>
+    <br /><h1 style="margin-top:1em; background-color:rgba(224, 224, 224, 0.75); padding:0.5em;">실습 후기</h1>
     <table class="table">
         <thead>
             <tr>
@@ -24,6 +24,8 @@
                     {{ board.pub_date }}
                 </td>
             </tr>
+            {% empty %}
+            <h4 style="text-align: center;">아직 작성된 글이 없습니다! 후배님들에게 도움이 되는 첫번째 작성글의 주인공이 되어주세요!</h4>
             {% endfor %}
         </tbody>
     </table>

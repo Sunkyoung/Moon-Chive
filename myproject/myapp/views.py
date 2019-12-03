@@ -1,11 +1,9 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import Notice, Board, Comment, Account
+from .models import Notice, Board, Comment
 from .forms import BoardForm, CommentForm
 from django.utils import timezone
 from django.core.paginator import Paginator
-# from django.contrib.auth.decorators import login_required
-# from myapp.forms import CustomAccountForm
-# from django_registration.backends.activation.views import RegistrationView as BaseRegistrationView
+
 
 # Create your views here.
 # 홈 화면 보여주는 함수
@@ -101,15 +99,3 @@ def notice_detail(request, notice_id):
     notice_detail = get_object_or_404(Notice, pk=notice_id)
     return render(request, 'notice_detail.html', {'notice': notice_detail})
 
-# registration
-# class RegistrationView(BaseRegistrationView):
-#     form_class = CustomAccountForm
-
-#     def register(self, form):
-#         new_user = BaseRegistrationView.register(self, form)
-#         acc = Account()
-#         acc.username = form.cleaned_data['username']
-#         acc.user = new_user
-#         # acc.status = 'created'
-#         acc.save()
-        

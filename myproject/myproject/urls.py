@@ -15,38 +15,36 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django_registration.backends.activation.views import RegistrationView
-# from myapp.forms import RegistrationForm
 from django.conf.urls import url
 import myapp.views
-from accounts.forms import CustomAccountForm
 from django.conf import settings
 from django.conf.urls.static import static
+import user.views
+from user.views import UserRegistrationView, UserLoginView, MyPasswordChangeView
+from django.contrib.auth.views import LogoutView
+from django.contrib.auth import views
+from django.urls import path, reverse_lazy
+from django.contrib.auth import views as auth_views
 
 
-urlpatterns = [
-    
-    # path('accounts/', include('accounts.urls')),
+urlpatterns = [  
     path('admin/', admin.site.urls),
     path('', myapp.views.home, name='home'),
     path('about/', myapp.views.about, name='about'),
     path('board/', myapp.views.board, name='board'),
     path('board/<int:board_id>/', myapp.views.board_detail, name='board_detail'),
-    path('board/create/', myapp.views.board_create, name='create'),
+    path('board/create/' , myapp.views.board_create, name='create'),
     path('board/<int:board_id>/delete/', myapp.views.board_delete, name='delete'),
     path('board/<int:board_id>/update', myapp.views.board_update, name='update'),
     path('board/<int:board_id>/comment/<int:comment_id>/delete', myapp.views.comment_delete, name='comment_delete'),
-    # path('account/create/', RegistrationView.as_view(), name='signup'),
-    #path('account/login/', AccountLoginView.as_view(), name='login'),
     path('notice', myapp.views.notice, name='notice'),
     path('notice/<int:notice_id>/', myapp.views.notice_detail, name='detail'),
-    url(r'^accounts/', include('accounts.urls')),
-    url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^accounts/register/$',
-        RegistrationView.as_view(
-            form_class=CustomAccountForm
-        ), name='django_registration_register'),
-    url(r'^accounts/', include('django_registration.backends.activation.urls')),
+    path('user/create/', UserRegistrationView.as_view(), name='signup'),#회원가입 
+    path('user/login/', UserLoginView.as_view(), name='login'),  #로그인
+    path('user/logout/', LogoutView.as_view(), name='logout'), #로그아웃
+    path('user/update/', user.views.update, name='update'), #유저 수정
+    path('password_change/', MyPasswordChangeView.as_view(), name='password_change'),
+    path('user/delete', user.views.delete, name='delete'),
+    path('user/mypage', user.views.mypage, name='mypage'),
     
-    # url(r'^accounts/', include('django_registration.backends.one_step.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

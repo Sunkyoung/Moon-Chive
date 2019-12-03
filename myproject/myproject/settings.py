@@ -27,12 +27,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_REDIRECT_URL =''
+LOGIN_REDIRECT_URL ='/'
 # Application definition
+LOGOUT_REDIRECT_URL = '/'
 
 SESSION_COOKIE_SECURE = False
 
 INSTALLED_APPS = [
+    'user',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,13 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp.apps.MyappConfig',
-    'accounts',
-    'django_registration',
     'bootstrap_datepicker_plus',
     'bootstrap4',
     'ckeditor',
-    
-    
 ]
 
 MIDDLEWARE = [
@@ -112,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'accounts.Account'
+AUTH_USER_MODEL = 'user.User'           # '앱label.모델명'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
@@ -122,7 +120,10 @@ AUTHENTICATION_BACKENDS = (
 
 LANGUAGE_CODE = 'ko-KR'
 
+
 TIME_ZONE = 'Asia/Seoul'
+
+TIME_INPUT_FORMATS = ['%I:%M %p',]
 
 USE_I18N = True
 
@@ -146,3 +147,9 @@ BOOTSTRAP4 = {
     'include_jquery': True,
 }
 
+#이메일 인증
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = '50eliscent@gmail.com'
+EMAIL_HOST_PASSWORD = 'answjd1959'
+EMAIL_USE_TLS = True

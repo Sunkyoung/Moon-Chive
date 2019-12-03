@@ -38,7 +38,7 @@
             </tr>
             <tr>
                 <td col ="col">내용</td>
-                <td>{{ board.body }}</td>
+                <td>{{ board.body|safe }}</td>
             </tr>
             {% if board.pr_file %}
             <tr>

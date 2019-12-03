@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>마이페이지</title> 
+{% endblock title %}
+
+{% block content %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {{ username }}님의 Mypage 
+    </div>
+    <div class="panel-body">
+        <p>이름 : {{ firstname }} {{ lastname }}</p>
+        <p>아이디 : {{ username }}</p>
+        <p>이메일 : {{ email }}</p>
+        <p>주전공 : {{ major }}</p>
+        <p>문헌정보학 전공 형태 : {{ major_type }}</p>
+    </div>
+    <div class="buttons">
+        <div class="l_buttons">
+            <a href="{% url 'update' %}">
+                <button class="btn btn-dark">회원정보 수정</button>
+            </a>
+        </div>
+        <div class="r_buttons">
+            <a href="{% url 'password_change' %}">
+                <button class="btn btn-dark">비밀번호 변경</button>
+            </a>
+            <a href="{% url 'delete' %}">
+                <button class="btn btn-dark">회원탈퇴</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

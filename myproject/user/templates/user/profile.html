@@ -1,0 +1,13 @@
+
+{% block content %}
+<h2>{{ user.username }}'s Profile</h2>
+
+<h3>Email</h3>
+{{ user.email|default:"&dash;" }}
+
+<h3>Bio</h3>
+{{ user.profile.bio|default:"&dash;" }}
+
+<hr>
+<a href="{% url 'password_change' %}">암호 변경하기</a>
+{% endblock %}

@@ -39,19 +39,17 @@
                 <li class="topMenuLi"><a href="#">Accounts</a>
                 <ul class="submenu">
                 환영합니다.{{ user.username }}님!
-                
-                <li><a href="" class="submenuLink longLink">회원정보수정</a>
-                <li><a href="" class="submenuLink longLink">비밀번호 변경</a>
-                <li><a href=""> 로그아웃</a>
+                <li><a href="{% url 'mypage' %}" class="submenuLink longLink">마이페이지</a>
+                <li><a href="{% url 'logout' %}" class="submenuLink longLink"> 로그아웃</a>
                 <form id="logout" method="POST" action="">
                 {% csrf_token %} <input type="hidden" /> 
                 </form> 
-                <li><a href="/accounts/logout/" class="submenuLink longLink">회원탈퇴</a>
+               
             {% else %}
                 <li class="topMenuLi"><a href="">Accounts</a>
                 <ul class="submenu">
-                <li><a href="/accounts/login/" class="submenuLink longLink">Login</a></li>
-                <li><a href="/accounts/register" class="submenuLink longLink">Signup</a></li>
+                <li><a href="{% url 'login' %}" class="submenuLink longLink">Login</a></li>
+                <li><a href="{% url 'signup' %}" class="submenuLink longLink">Signup</a></li>
            {% endif %}
         </ul>
     </div>

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>회원삭제</h1>
+    <form action="{% url 'delete' %}" method="POST">
+        {% csrf_token %}
+        비밀번호: <input type="password" name="pw_del">
+        <input type="submit" value="회원탈퇴">
+    </form>
+
+{% endblock %}
